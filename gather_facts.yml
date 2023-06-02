@@ -9,11 +9,19 @@
       gather_subset: all
     register: result
     
+  - name: Create /router-facts/ directory if it does not exist
+    ansible.builtin.file:
+      path: /router-facts/
+      state: directory
+    delegate_to: backup-server
+    become: true
+    run_once: true
+    
   - name: Save router facts to txt file
     ansible.builtin.copy:
       content: "{{ result }}"
       dest: /router-facts/{{ inventory_hostname }}_facts.txt
-    delegate_to: localhost
+    delegate_to: backup-server
     
   - name: display version
     debug:
