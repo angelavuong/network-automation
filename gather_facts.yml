@@ -20,7 +20,7 @@
   - name: Save router facts to txt file
     ansible.builtin.copy:
       content: "{{ result }}"
-      dest: /router-facts/{{ inventory_hostname }}_facts.json
+      dest: /router-facts/{{ inventory_hostname }}_facts.txt
     delegate_to: backup-server
     become: true
     
