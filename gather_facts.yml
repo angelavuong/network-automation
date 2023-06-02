@@ -22,6 +22,7 @@
       content: "{{ result }}"
       dest: /router-facts/{{ inventory_hostname }}_facts.txt
     delegate_to: backup-server
+    become: true
     
   - name: display version
     debug:
