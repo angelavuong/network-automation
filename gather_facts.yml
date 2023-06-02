@@ -6,6 +6,14 @@
   tasks:
   - name: gather router facts
     cisco.ios.facts:
+      gather_subset: all
+    register: result
+    
+ - name: Save router facts to txt file
+   ansible.builtin.copy:
+     content: "{{ result }}"
+     dest: /router-facts/{{ inventory_hostname }}_facts.txt
+   delegate_to: localhost
     
   - name: display version
     debug:
